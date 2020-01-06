@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ public class EmployeeController implements ErrorController {
 	EmployeeService employeeService;
 
 	@PostMapping(value = "/employeeEntry")
-	public ModelAndView employeeEntry(@ModelAttribute("employee") Employee employee) {// @RequestBody  Employee employee
+	public ModelAndView employeeEntry(@RequestBody  Employee employee) {// @RequestBody  Employee employee @ModelAttribute("employee") Employee employee
 		logger.info("Spring params is welcome");
 		logger.info("The First Name Is" + employee.getFirstName());
 		employeeService.createEmployee(employee);

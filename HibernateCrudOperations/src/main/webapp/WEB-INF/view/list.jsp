@@ -40,7 +40,8 @@
  
                         <a href="/editEmployee/<c:out value='${employee.employeeId}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/delete/<c:out value='${employee.employeeId}' />">Delete</a>                     
+                        <a href="/delete/<c:out value='${employee.employeeId}' />">Delete</a> 
+                        <a href="benefits/show/<c:out value='${employee.employeeId}' />">Benefits</a>                     
                     </td>
                </tr>
             </c:forEach>
