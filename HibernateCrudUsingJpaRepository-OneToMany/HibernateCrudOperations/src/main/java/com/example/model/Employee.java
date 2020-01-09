@@ -11,18 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "employeedb")
 public class Employee {
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer employeeId;
 	
 	@Column(name="firstname")
@@ -41,36 +39,26 @@ public class Employee {
 	@Column(name="emailid")
 	private String emailId;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "employee_account",
-            joinColumns = { @JoinColumn(name = "employee_id", referencedColumnName = "employeeId") },
-            inverseJoinColumns = { @JoinColumn(name = "account_id", referencedColumnName = "accountId") })
-	private Account accounts;
-
-	@OneToMany(targetEntity = Benefits.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_employeeid" , referencedColumnName = "employeeId")
+//	@OneToOne(mappedBy = "employee",cascade = CascadeType.ALL)
+//	private Account account;
+	
+	
+	@OneToOne(fetch=FetchType.EAGER , cascade=CascadeType.ALL)
+	@JoinColumn(name = "account_id")
+	private Account account;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "employee_benefits",
+          joinColumns = { @JoinColumn(name = "employee_id") },
+          inverseJoinColumns = { @JoinColumn(name = "benefits_id") })
 	private List<Benefits> benefits;
 	
 	public Employee() {
 		super();
-	}
-	
-	public Employee(Integer employeeId, @NotNull @Size(max = 100) String firstName, @Size(max = 100) String lastName,
-			@NotNull Float salary, @NotNull @Size(max = 10) Long mobileNumber, String emailId, Account accounts) {
-		super();
-		this.employeeId = employeeId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.salary = salary;
-		this.mobileNumber = mobileNumber;
-		this.emailId = emailId;
-		this.accounts = accounts;
-	}
-	
-	
+	}	
 
 	public Employee(Integer employeeId, String firstName, String lastName, Float salary, Long mobileNumber,
-			String emailId, Account accounts, List<Benefits> benefits) {
+			String emailId, Account account, List<Benefits> benefits) {
 		super();
 		this.employeeId = employeeId;
 		this.firstName = firstName;
@@ -78,7 +66,7 @@ public class Employee {
 		this.salary = salary;
 		this.mobileNumber = mobileNumber;
 		this.emailId = emailId;
-		this.accounts = accounts;
+		this.account = account;
 		this.benefits = benefits;
 	}
 
@@ -131,14 +119,6 @@ public class Employee {
 		this.emailId = emailId;
 	}
 
-	public Account getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(Account accounts) {
-		this.accounts = accounts;
-	}
-
 	public List<Benefits> getBenefits() {
 		return benefits;
 	}
@@ -146,12 +126,14 @@ public class Employee {
 	public void setBenefits(List<Benefits> benefits) {
 		this.benefits = benefits;
 	}
-	
-	
-	
-	
-	
-	
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 	
 
 }

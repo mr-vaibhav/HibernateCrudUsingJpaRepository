@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Benefits {
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name="salary")
@@ -31,16 +31,7 @@ public class Benefits {
 		super();
 	}
 
-	public Benefits(Integer id, Float salary, String holiday, Float bonus) {
-		super();
-		this.id = id;
-		this.salary = salary;
-		this.holiday = holiday;
-		this.bonus = bonus;
-	}
 
-	
-	
 	
 	public Benefits(Integer id, Float salary, String holiday, Float bonus, String beneficiaryname) {
 		super();

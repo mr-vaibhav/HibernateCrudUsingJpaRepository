@@ -36,7 +36,7 @@
                     <td>${employee.emailId}</td>
 					<td>${employee.mobileNumber}</td>
 					<td>${employee.salary}</td>
-					<td>${employee.accounts.accountNumber}</td>
+					<td>${employee.account.accountNumber}</td>
                     <td>
                     
  

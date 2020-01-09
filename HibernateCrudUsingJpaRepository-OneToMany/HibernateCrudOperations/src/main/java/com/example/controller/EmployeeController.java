@@ -6,17 +6,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.model.Account;
 import com.example.model.Benefits;
 import com.example.model.Employee;
 import com.example.service.BenefitsService;
@@ -35,10 +34,10 @@ public class EmployeeController implements ErrorController {
 	BenefitsService benefitsService;
 
 	@PostMapping(value = "/employeeEntry")
-	public ModelAndView employeeEntry(@ModelAttribute("employee") Employee employee) {// @RequestBody  Employee employee @ModelAttribute("employee") Employee employee
+	public ModelAndView employeeEntry(@ModelAttribute("employee") Employee employee,BindingResult result) {// @RequestBody  Employee employee @ModelAttribute("employee") Employee employee
 		logger.info("Spring params is welcome");
 		logger.info("The First Name Is" + employee.getFirstName());
-		//employee.setAccounts((new Account(1,100L)));
+		//logger.info("The First Name Is" + employee.getAccount().getAccountNumber());
 		employeeService.createEmployee(employee);
 		model.setViewName("Success");
 		return model;

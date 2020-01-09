@@ -34,6 +34,11 @@
 				</tr>
 				
 				<tr>
+					<td>Account_No</td>
+					<td><input type="text" name="account.accountNumber" /></td>
+				</tr>
+				
+				<tr>
 					<td>Select Beneficiary</td>
 					<td> 
 						<select name="benefits"  multiple="multiple">
